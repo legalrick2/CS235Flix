@@ -14,7 +14,7 @@ class Review:
         self._movie = inimovie
         self._review_text = initext
         
-        self._timestamp = datetime.today()
+        self._timestamp = datetime.now()
 
     def __repr__(self):
         return f"{self.movie} {self.review_text} {self.rating}/10"
