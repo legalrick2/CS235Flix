@@ -18,7 +18,6 @@ class MovieFileCSVReader:
         with open("datafiles/"+self.__file_name, mode='r', encoding='utf-8-sig') as csvfile: #i delete "datafiles/"+ before posting to coderunner, if this isnt here then my IDE, vscode, doesnt find it
             movie_file_reader = csv.DictReader(csvfile)
 
-            index = 0
             for row in movie_file_reader:
                 if Movie(row['Title'],int(row['Year'])) not in self.__dataset_of_movies:
                     self.__dataset_of_movies.append(Movie(row['Title'], int(row['Year'])))
@@ -26,13 +25,16 @@ class MovieFileCSVReader:
 
                 self.__dataset_of_directors.add(Director(row['Director']))
                 self.dataset_of_movies[-1].director = Director(row['Director'])
+                self.dataset_of_movies[-1].description = row['Description']
+                self.dataset_of_movies[-1].runtime = row['Runtime (Minutes)']
 
                 for g in row['Genre'].split(","):
                     self.__dataset_of_genres.add(Genre(g.strip()))
 
                 for a in row['Actors'].split(","):
                     self.__dataset_of_actors.add(Actor(a.strip()))
-                index += 1
+
+
                 #print(f"Movie {index} with title: {title}, release year {release_year}")
 
     @property
@@ -75,7 +77,11 @@ class MovieFileCSVReader:
 # print(f'number of unique directors: {len(movie_file_reader.dataset_of_directors)}')
 # print(f'number of unique genres: {len(movie_file_reader.dataset_of_genres)}')
 
-# print(movie_file_reader.dataset_of_genres)
+# #print(movie_file_reader.dataset_of_genres)
+# print(movie_file_reader.dataset_of_movies[1])
 # print(movie_file_reader.dataset_of_movies[1].director)
+# print(movie_file_reader.dataset_of_movies[1].description)
+# print(movie_file_reader.dataset_of_movies[1].runtime)
+
 
 #datafilereaders.movie_file_csv_reader
